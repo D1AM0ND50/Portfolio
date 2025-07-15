@@ -2,68 +2,170 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>D1AM0ND5 Portfolio</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D1AM0ND5 • Game Developer & Animator</title>
+  <style>
+    /* ---------- Reset & Base ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      color: #f4f4f4;
+      background: radial-gradient(circle at 20% 20%, #1f1f1f, #111 70%);
+      overflow-x: hidden;
+    }
+    a {color: inherit; text-decoration: none;}
+    section {padding: 7rem 10%; min-height: 100vh; position: relative;}
+    h1, h2, h3 {font-weight: 600; letter-spacing: .5px;}
+    h1 {font-size: 3rem;} h2 {font-size: 2.25rem; margin-bottom: .75em;} h3 {font-size: 1.35rem; margin-bottom: .25em;}
+    p {line-height: 1.6; opacity: .9; font-size: 1.05rem;}
+
+    /* ---------- Reusable ---------- */
+    .btn {display: inline-block; padding: .85rem 2.2rem; margin-top: 1.5rem; background: linear-gradient(135deg, #00c6ff, #0072ff); border: none; border-radius: 2em; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform .2s, box-shadow .2s;}
+    .btn:hover {transform: translateY(-4px); box-shadow: 0 8px 18px rgba(0, 136, 255, .4);}    
+    .fade {opacity:0; transform: translateY(30px); transition: opacity .9s ease, transform .9s ease;}
+    .fade.show {opacity:1; transform: translateY(0);}    
+
+    /* ---------- Header ---------- */
+    header {position: fixed; top: 0; left: 0; width: 100%; height: 4.5rem; backdrop-filter: blur(6px); border-bottom: 1px solid rgba(255,255,255,.05); display: flex; align-items: center; justify-content: space-between; padding: 0 10%; z-index: 1000;}
+    header nav a {margin-left: 2rem; font-weight: 500; opacity: .85; position: relative;}
+    header nav a::after {content:""; position:absolute; bottom:-6px; left:0; width:0%; height:2px; background:#00c6ff; transition:width .3s;}
+    header nav a:hover::after {width:100%;}
+
+    /* ---------- Hero ---------- */
+    #hero {display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; background: url('hero-bg.jpg') center/cover fixed;}
+    #hero h1 {font-size: clamp(2.5rem, 6vw, 4.5rem); background: linear-gradient(135deg,#00c6ff,#0072ff 60%,#00c6ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom: .4em;}
+    #hero p {font-size: 1.25rem; max-width: 540px;}
+
+    /* ---------- About ---------- */
+    #about .content {max-width: 760px;}
+
+    /* ---------- Timeline ---------- */
+    .timeline {position: relative; margin-top: 3rem;}
+    .timeline::before {content:""; position: absolute; left: 20px; top: 0; bottom: 0; width: 4px; background:#0072ff;}
+    .tl-item {position: relative; padding-left: 60px; margin-bottom: 2.5rem;}
+    .tl-item::before {content:""; position: absolute; left: 12px; top: 8px; width: 16px; height: 16px; border-radius:50%; background:#00c6ff; border:3px solid #111;}
+
+    /* ---------- Skills ---------- */
+    .skills {display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 1.5rem; margin-top:2rem;}
+    .skill {background:#1b1b1b; padding:1.4rem 1rem; border-radius:1rem; text-align:center; box-shadow:0 4px 14px rgba(0,0,0,.4); transition: transform .25s, box-shadow .25s;}
+    .skill:hover {transform:translateY(-6px); box-shadow:0 8px 20px rgba(0,0,0,.55);}
+
+    /* ---------- Projects ---------- */
+    .proj-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.2rem; margin-top:2.5rem;}
+    .proj-card {position:relative; border-radius:1rem; overflow:hidden; cursor:pointer;}
+    .proj-card img {width:100%; height:100%; object-fit:cover; display:block; transition: transform .5s;}
+    .proj-card:hover img {transform:scale(1.08);}    
+    .proj-card::after {content:"View"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.45); opacity:0; font-size:1.4rem; font-weight:600; transition:opacity .3s;}
+    .proj-card:hover::after {opacity:1;}
+
+    /* ---------- Download ---------- */
+    #download {text-align:center;}
+    #download .btn {font-size:1.25rem; padding:1rem 3rem;}
+
+    /* ---------- Footer ---------- */
+    footer {padding:2.2rem 10%; text-align:center; background:#0d0d0d; font-size:.9rem; opacity:.7;}
+
+    /* ---------- Responsive ---------- */
+    @media(max-width:768px){header nav{display:none;} section{padding:6rem 6%;} .timeline::before{left:12px;} .tl-item{padding-left:46px;}}
+  </style>
 </head>
 <body>
   <header>
-    <h1>D1AM0ND5</h1>
+    <div style="font-weight:700; font-size:1.2rem;">D1AM0ND5</div>
     <nav>
       <a href="#about">About</a>
+      <a href="#timeline">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
+      <a href="#download">Download</a>
     </nav>
   </header>
 
+  <!-- Hero -->
+  <section id="hero">
+    <h1 class="fade">Hi, I'm D1AM0ND5</h1>
+    <p class="fade" style="max-width:640px;">A passionate <strong>game developer & animator</strong> crafting immersive experiences in Roblox Studio, Unity & Blender.</p>
+    <a href="#about" class="btn fade">Discover More ↓</a>
+  </section>
+
+  <!-- About -->
   <section id="about">
-    <h2>About Me</h2>
-    <p>I am a 3D game developer on Unity and worked for 3 years on Roblox Studio as well.</p>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>C#</li>
-      <li>Lua</li>
-    </ul>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project-card">
-      <img src="images/cover.png" alt="Run Cam Title Screen" />
-      <h3>Run Cam</h3>
-      <p>A horror game project developed in Unity and Roblox Studio.</p>
-      <button onclick="showPopup()">More Info</button>
-      <a href="downloads/RunCam.zip" download class="download-btn">Download Game</a>
+    <div class="content fade">
+      <h2>About Me</h2>
+      <p>Hey there! I'm <strong>D1AM0ND5</strong>, a game developer and animator with a love for creating engaging interactive worlds. Over the past three years, I've honed my craft in <strong>Roblox Studio</strong>, spent the last month diving deep into <strong>Unity</strong>, and another month exploring <strong>Blender</strong> for 3D art & animation. My mission? To blend storytelling, design, and technology into experiences players will remember.</p>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:diamondworking36@gmail.com">diamondworking36@gmail.com</a></p>
-    <p>Discord: infinitygamer</p>
-  </section>
-
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <span class="close" onclick="closePopup()">&times;</span>
-      <h2>Run Cam</h2>
-      <p>Run Cam is a chilling horror game where players must survive terrifying encounters in a dark, atmospheric forest. Built using Unity and Roblox Studio.</p>
-      <div class="gallery">
-        <img src="images/scene1.png" alt="Scene 1" />
-        <img src="images/scene2.png" alt="Scene 2" />
-        <img src="images/scene3.png" alt="Scene 3" />
+  <!-- Timeline / Experience -->
+  <section id="timeline">
+    <h2 class="fade">Professional Journey</h2>
+    <div class="timeline">
+      <div class="tl-item fade">
+        <h3>Roblox Studio Developer</h3>
+        <p>3&nbsp;Years Experience • Lua, asset pipeline, multiplayer systems, VFX, monetisation.</p>
+      </div>
+      <div class="tl-item fade">
+        <h3>Unity Enthusiast</h3>
+        <p>1&nbsp;Month • C#, URP, shader graph, quick prototyping.</p>
+      </div>
+      <div class="tl-item fade">
+        <h3>Blender Artist</h3>
+        <p>1&nbsp;Month • Modelling, rigging, procedural animation, texture baking.</p>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2 class="fade">Core Skills</h2>
+    <div class="skills">
+      <div class="skill fade">Game Development</div>
+      <div class="skill fade">Animation</div>
+      <div class="skill fade">Scripting (Lua / C#)</div>
+      <div class="skill fade">VFX & Lighting</div>
+      <div class="skill fade">3D Modelling</div>
+      <div class="skill fade">UI/UX Design</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="fade">Showcase Projects</h2>
+    <p class="fade">A curated glimpse into my recent creations.</p>
+    <div class="proj-grid">
+      <div class="proj-card fade"><img src="images/cover.png" alt="Cover Image" /></div>
+      <div class="proj-card fade"><img src="images/scene1.png" alt="Project Image 1" /></div>
+      <div class="proj-card fade"><img src="images/scene2.png" alt="Project Image 2" /></div>
+      <div class="proj-card fade"><img src="images/scene3.png" alt="Project Image 3" /></div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section id="download">
+    <h2 class="fade">Grab the Game</h2>
+    <p class="fade">Ready to jump in? Download the latest build of <strong>RunCam</strong> below.</p>
+    <a href="downloads/RunCam.zip" class="btn fade" download>Download RunCam.zip</a>
+  </section>
 
   <footer>
-    <p>© 2025 D1AM0ND5. All rights reserved.</p>
+    © 2025 D1AM0ND5 &middot; Built with ❤️ + ☕ in India
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // IntersectionObserver for fade‑in animations
+    const faders = document.querySelectorAll('.fade');
+    const io = new IntersectionObserver((entries, observer)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){entry.target.classList.add('show'); observer.unobserve(entry.target);}  
+      });
+    }, {threshold:.2});
+    faders.forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>
+
